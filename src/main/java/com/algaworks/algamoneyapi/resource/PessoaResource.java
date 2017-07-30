@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -25,6 +26,11 @@ public class PessoaResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @GetMapping
+    public List<Pessoa> listar() {
+        return pessoaRepository.findAll();
+    }
 
     @PostMapping
     public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
